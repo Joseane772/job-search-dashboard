@@ -1,0 +1,18 @@
+services:
+  painel:
+    image: ghcr.io/joseane772/job-search-dashboard:latest
+    build: .
+    container_name: painel
+    restart: unless-stopped
+    # So no teu computador: a API nao tem palavra-passe, por isso nao a abras a rede.
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      TZ: ${TZ:-Europe/Lisbon}
+      PAINEL_SYNC_MIN: ${PAINEL_SYNC_MIN:-30}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+    # Corre com o teu utilizador para os ficheiros em ./dados continuarem teus.
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./dados:/dados

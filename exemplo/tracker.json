@@ -1,0 +1,59 @@
+{
+  "_leia_me": "Uma entrada por candidatura. estado: triagem, rascunho, enviada, entrevista ou fechada. Datas em AAAA-MM-DD. 'dominios' (opcional) lista domínios de email que pertencem a esta candidatura, por exemplo o de uma plataforma de testes. Os dados abaixo são inventados, para veres o painel a funcionar: substitui-os pelos teus.",
+  "candidaturas": [
+    {
+      "id": "acme-backend-junior",
+      "empresa": "ACME Software",
+      "funcao": "Junior Backend Developer (Python)",
+      "estado": "enviada",
+      "enviada": "2026-10-20",
+      "contacto": null,
+      "local": "Porto, híbrido",
+      "nota": "Exemplo. Candidatura pelo site da empresa com CV em inglês."
+    },
+    {
+      "id": "nordtel-graduate",
+      "empresa": "Nordtel AB",
+      "funcao": "Graduate Network Engineer",
+      "estado": "entrevista",
+      "enviada": "2026-10-05",
+      "contacto": "2026-10-28",
+      "local": "Estocolmo, Suécia",
+      "dominios": [
+        "talentplatform.example"
+      ],
+      "nota": "Exemplo. Teste online feito; primeira entrevista marcada."
+    },
+    {
+      "id": "livraria-central-natal",
+      "empresa": "Livraria Central",
+      "funcao": "Operador de loja part-time, campanha de Natal",
+      "estado": "rascunho",
+      "enviada": null,
+      "contacto": null,
+      "local": "Lisboa",
+      "prazo": "2026-11-15",
+      "nota": "Exemplo. Formulário preenchido, falta submeter."
+    },
+    {
+      "id": "datafarol-data-trainee",
+      "empresa": "DataFarol",
+      "funcao": "Data Engineering Trainee",
+      "estado": "triagem",
+      "enviada": null,
+      "contacto": null,
+      "local": "Remoto, Portugal",
+      "nota": "Exemplo. Ler o anúncio e decidir."
+    },
+    {
+      "id": "orbita-qa",
+      "empresa": "Órbita Labs",
+      "funcao": "QA Engineer",
+      "estado": "fechada",
+      "enviada": "2026-09-12",
+      "contacto": "2026-10-02",
+      "local": "Coimbra",
+      "nota": "Exemplo. Recusa por email a 2 out."
+    }
+  ]
+}

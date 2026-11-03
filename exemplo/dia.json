@@ -1,0 +1,156 @@
+{
+  "_leia_me": "Dados do painel. 'perfil' personaliza a página. 'rotina' são blocos recorrentes (dias: 1 = segunda ... 5 = sexta). 'tarefas' são coisas a fazer à mão; 'candidatura' liga ao id no tracker.json; 'feito' guarda a data em que foi marcada. 'leitura' é opcional. Datas em AAAA-MM-DD.",
+  "perfil": {
+    "nome": "Alex",
+    "titulo": "Alex Exemplo",
+    "cidade": "Porto",
+    "prompt": "alex@painel ~/candidaturas $"
+  },
+  "rotina": [
+    {
+      "inicio": "08:30",
+      "fim": "10:30",
+      "titulo": "Foco 1: candidaturas prioritárias",
+      "tipo": "foco",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "nota": "A candidatura com prazo mais curto ou maior valor."
+    },
+    {
+      "inicio": "10:30",
+      "fim": "10:45",
+      "titulo": "Pausa",
+      "tipo": "pausa",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "inicio": "10:45",
+      "fim": "12:30",
+      "titulo": "Foco 2: CVs, cartas e formulários",
+      "tipo": "foco",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "inicio": "12:30",
+      "fim": "13:30",
+      "titulo": "Almoço",
+      "tipo": "refeicao",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "inicio": "13:30",
+      "fim": "14:00",
+      "titulo": "Email e seguimentos",
+      "tipo": "contacto",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "inicio": "14:00",
+      "fim": "16:00",
+      "titulo": "Aprender e projetos",
+      "tipo": "aprender",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "inicio": "16:00",
+      "fim": "16:30",
+      "titulo": "Fecho do dia: tracker e plano de amanhã",
+      "tipo": "contacto",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "inicio": "16:30",
+      "fim": "17:00",
+      "titulo": "Leitura",
+      "tipo": "leitura",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "excecoes": [],
+  "eventos": [
+    {
+      "data": "2026-11-20",
+      "titulo": "Feira de emprego (exemplo)",
+      "local": "Porto"
+    },
+    {
+      "data": "2026-12-02",
+      "fim": "2026-12-04",
+      "titulo": "Conferência de tecnologia (exemplo)",
+      "local": "Lisboa"
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "livraria-submeter",
+      "texto": "Submeter a candidatura à Livraria Central",
+      "detalhe": "Exemplo de tarefa ligada a uma candidatura.",
+      "prazo": "2026-11-15",
+      "candidatura": "livraria-central-natal",
+      "feito": null,
+      "destaque": "Falta submeter"
+    },
+    {
+      "id": "nordtel-preparar",
+      "texto": "Preparar a entrevista da Nordtel",
+      "detalhe": "Rever o projeto final e preparar 3 perguntas.",
+      "prazo": null,
+      "candidatura": "nordtel-graduate",
+      "feito": null
+    }
+  ],
+  "leitura": {
+    "livro": "Um livro à tua escolha",
+    "autor": "Autor",
+    "capitulo": 2,
+    "capitulos": 12,
+    "atualizado": "2026-11-01"
+  }
+}

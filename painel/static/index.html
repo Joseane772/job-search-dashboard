@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel do Dia</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230000f2'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <span class="brand"><span id="brand">Painel</span> <span class="brand-sub">/ painel</span></span>
+    <nav class="links" id="navLinks">
+      <a href="#hoje">Hoje</a>
+      <a href="#urgente">Urgente</a>
+      <a href="#caixa">Caixa</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#tracker">Tracker</a>
+    </nav>
+    <span class="clock" id="clock">--:--</span>
+  </div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+</header>
+
+<div class="offline" id="offline" hidden>
+  <div class="wrap">Sem ligação ao servidor do painel. Confirma que o servidor (ou o contentor) está a correr e recarrega.</div>
+</div>
+
+<section class="hero" id="hoje">
+  <svg class="burst" id="burst" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="1" fill="none" aria-hidden="true">
+    <circle cx="240" cy="240" r="10" fill="#ffffff" stroke="none"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow"><span class="live-dot"></span><span id="dateLine">&nbsp;</span></p>
+      <h1><span class="h1-line" id="greet">Bom dia,</span><span class="h1-line" id="nome"></span></h1>
+      <p class="lede" id="lede">&nbsp;</p>
+      <div class="agora" id="agora"></div>
+    </div>
+    <div class="term" aria-label="Resumo">
+      <div class="term-bar"><span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span></div>
+      <div class="term-body" id="term"></div>
+    </div>
+  </div>
+</section>
+
+<section id="urgente">
+  <div class="wrap">
+    <h2 class="section-title">Urgente</h2>
+    <div class="urg-grid">
+      <div>
+        <p class="sub-head"><span>A fazer, por prazo</span><span id="doneToday"></span></p>
+        <ol class="urg-list" id="urgList"></ol>
+      </div>
+      <aside>
+        <p class="sub-head"><span>Seguimentos</span><span id="segCount"></span></p>
+        <p class="aside-note">Candidaturas enviadas há 10 a 45 dias sem resposta.</p>
+        <ul class="seg-list" id="segList"></ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="caixa">
+  <div class="wrap">
+    <h2 class="section-title">Caixa</h2>
+    <div class="urg-grid">
+      <div>
+        <p class="sub-head"><span>Emails de recrutamento</span><span id="caixaCount"></span></p>
+        <label class="ver-todos"><input type="checkbox" id="verTodos"> Mostrar também os arrumados, alertas e outros</label>
+        <ul class="mail-list" id="caixaList"></ul>
+      </div>
+      <aside>
+        <p class="sub-head"><span>Conta Google</span></p>
+        <div class="google-box" id="googleBox"></div>
+        <p class="aside-note">O painel classifica cada email por regras (recusa, entrevista, teste, receção) e associa-o à candidatura pelo nome ou domínio da empresa. A mudança de estado só acontece quando carregas no botão.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="agenda">
+  <div class="wrap">
+    <h2 class="section-title">Agenda</h2>
+    <div class="agenda-grid">
+      <div>
+        <p class="sub-head"><span id="timelineTitle">Rotina de hoje</span><a href="https://calendar.google.com/calendar/r/day" target="_blank" rel="noopener">Calendário &rarr;</a></p>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <aside>
+        <div class="card leitura tilt" id="leitura"></div>
+        <p class="sub-head events-head"><span>Próximos eventos</span></p>
+        <ul class="evt-list" id="evtList"></ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="board-section" id="tracker">
+  <div class="wrap">
+    <h2 class="section-title">Tracker</h2>
+    <p class="board-lede">Arrasta um cartão para outra coluna para mudar o estado no <code>tracker.json</code>. Clica num cartão para ler a nota inteira.</p>
+    <div class="board-filters" id="boardFilters">
+      <input class="search" id="search" type="search" placeholder="Procurar empresa, função, local..." aria-label="Procurar no tracker">
+    </div>
+    <div class="board" id="board"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="fine" id="updated">A carregar...</span>
+    <button class="btn ghost" id="reload" type="button">Atualizar</button>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

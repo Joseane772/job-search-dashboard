@@ -1,0 +1,5 @@
+# Os teus dados nunca entram no repositorio.
+dados/
+.env
+__pycache__/
+*.pyc

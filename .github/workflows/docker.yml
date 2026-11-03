@@ -1,0 +1,74 @@
+name: docker
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testes
+        run: python -m unittest discover -s tests -v
+
+  imagem:
+    needs: testar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Construir para teste
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: painel:teste
+
+      - name: Arrancar o contentor e pedir o estado
+        run: |
+          mkdir dados && chmod 777 dados
+          docker run -d --name painel -p 127.0.0.1:8787:8787 -v "$PWD/dados:/dados" painel:teste
+          for i in $(seq 20); do curl -sf http://127.0.0.1:8787/api/estado -o estado.json && break; sleep 1; done
+          python3 -c "import json; d=json.load(open('estado.json')); assert len(d['candidaturas']) == 5, d; assert d['google']['configurado'] is False; print('ok', d['hoje'])"
+          curl -sf http://127.0.0.1:8787/ | grep -q 'Painel do Dia'
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: evil.example' http://127.0.0.1:8787/api/estado)" = 403
+          test -f dados/tracker.json && test -f dados/dia.json
+          docker logs painel
+
+      - uses: docker/login-action@v3
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=sha,format=short
+
+      - name: Publicar (amd64 e arm64)
+        if: github.event_name != 'pull_request'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
